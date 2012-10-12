@@ -21,23 +21,12 @@ class s3cmd (
   $aws_secret_access_key = hiera('aws_secret_access_key')
 ) inherits s3cmd::params {
 
-  Package['s3cmd'] -> File['s3cfg']
-
 	package { 's3cmd':
     ensure => $ensure, 
   }
 
-  if $user == 'root' {
-    $home_path = '/root'
-  }
-  else {
-    $home_path = '/home'
-  }
- 
-  file { 's3cfg':
+  s3cmd::config { $user:
     ensure => $ensure,
-    path => "${home_path}/.s3cfg",
-    content => template("s3cmd/s3cfg.erb"),
   }
-  
+
 }
