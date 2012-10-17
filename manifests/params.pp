@@ -1,6 +1,6 @@
 # Class s3cmd::params
 # 
-# All config settings for candiapp class
+# All config settings for s3cmd class
 #
 # == Parameters
 #
