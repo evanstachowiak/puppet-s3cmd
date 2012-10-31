@@ -21,12 +21,18 @@ class s3cmd (
   $aws_secret_access_key = hiera('aws_secret_access_key')
 ) inherits s3cmd::params {
 
-	package { 's3cmd':
+  package { 's3cmd':
     ensure => $ensure, 
   }
 
   s3cmd::config { $user:
-    ensure => $ensure,
+    ensure                => $ensure,
+    user                  => $user,
+    owner                 => $owner,
+    group                 => $group,
+    mode                  => $mode,
+    aws_access_key_id     => $aws_access_key_id,
+    aws_secret_access_key => $aws_secret_access_key,
   }
 
 }
